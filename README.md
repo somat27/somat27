@@ -3,10 +3,10 @@
 ---
 
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="center" height="140" src="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&langs_count=7&theme=tokyonight" />
+  <img align="center" height="145" src="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&langs_count=7&theme=tokyonight" />
 </a>
 <a href="https://github.com/anuraghazra/convoychat">
-  <img align="center" height="140" src="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&theme=tokyonight" />
+  <img align="center" height="145" src="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&theme=tokyonight" />
 </a>
 <p align="center"> 
   Visitor count<br>
