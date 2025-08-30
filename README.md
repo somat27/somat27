@@ -28,9 +28,7 @@
 
 ## TryHackMe
 
-<a href="https://tryhackme.com/p/Somat27" target="_blank" rel="noreferrer">
-  <img src="https://tryhackme-badges.s3.amazonaws.com/Somat27.png" alt="TryHackMe Badge"/>
-</a>
+<a target="_blank" href="https://tryhackme.com/p/Somat27"><img title="TryHackMe Profile" src="https://tryhackme-badges.s3.amazonaws.com/Somat27.png" alt="TryHackMe"></a>
 
 ## Certifications & Education
 - 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** — *in progress*  
