@@ -6,7 +6,7 @@ on:
       - README.md
       - .github/workflows/update-thm-badge.yml
   schedule:
-    - cron: '0 */6 * * *' 
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,20 +24,46 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Ver headers do remoto
+        run: |
+          curl -sI "https://tryhackme-badges.s3.amazonaws.com/Somat27.png" | sed -n '1,20p'
+
       - name: Descarregar badge
         run: |
-          curl -fsSL "https://tryhackme-badges.s3.amazonaws.com/Somat27.png?cache-control=no-cache" -o thm_badge.png
+          curl -fsSL "https://tryhackme-badges.s3.amazonaws.com/Somat27.png" -o thm_badge.png
 
-      - name: Commit se mudou
+      - name: Debug – hashes HEAD vs novo
+        run: |
+          echo "Hash no commit (HEAD):"
+          git show HEAD:thm_badge.png | sha256sum || echo "Ainda não existe no HEAD"
+          echo "Hash após download:"
+          sha256sum thm_badge.png
+
+      - name: Commit se mudou (por hash)
         run: |
           set -e
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Tomás Gonçalves"
+          git config user.email "70666298+somat27@users.noreply.github.com"
 
-          if [[ -n "$(git status --porcelain=1 -- thm_badge.png)" ]]; then
+          # Se não existir no HEAD, comita já
+          if ! git cat-file -e HEAD:thm_badge.png 2>/dev/null; then
+            git add thm_badge.png
+            git commit -m "chore: add THM badge"
+            git push
+            exit 0
+          fi
+
+          # Compara hashes HEAD vs ficheiro descarregado
+          HEAD_HASH=$(git show HEAD:thm_badge.png | sha256sum | awk '{print $1}')
+          NEW_HASH=$(sha256sum thm_badge.png | awk '{print $1}')
+
+          echo "HEAD  = $HEAD_HASH"
+          echo "NOVO  = $NEW_HASH"
+
+          if [ "$HEAD_HASH" != "$NEW_HASH" ]; then
             git add thm_badge.png
             git commit -m "chore: update THM badge"
             git push
           else
-            echo "Sem alterações"
+            echo "Sem alterações (conteúdo idêntico)"
           fi
