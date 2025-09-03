@@ -28,7 +28,7 @@
 
 ## TryHackMe
 
-![TryHackMe](thm_badge.png)
+[![TryHackMe](thm_badge.png)](https://tryhackme.com/p/Somat27)
 
 ## Certifications & Education
 - 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** — *in progress*  
