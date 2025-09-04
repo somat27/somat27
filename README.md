@@ -68,8 +68,6 @@
         style="display:block;margin:0;"
       />
     </picture>
-  </div>
-  <div align="center" style="margin-top:0;">
     <picture>
       <source
         srcset="https://streak-stats.demolab.com?user=somat27&hide_border=true&theme=tokyonight"
