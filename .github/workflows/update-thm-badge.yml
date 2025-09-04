@@ -24,13 +24,55 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Obter URL do badge via API (com fallback)
+        id: badge
+        run: |
+          set -euo pipefail
+
+          API_URL="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5573378"
+          FALLBACK_URL="https://tryhackme-badges.s3.amazonaws.com/Somat27.png"
+
+          # Garantir jq
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+          echo "A consultar: $API_URL"
+          # Algumas instâncias do endpoint precisam de Accept: application/json
+          if RAW_JSON=$(curl -fsSL -H "Accept: application/json" "$API_URL"); then
+            :
+          else
+            echo "Falhou a leitura da API; a usar fallback." >&2
+            echo "url=$FALLBACK_URL" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Extrair o primeiro URL que pareça ser uma imagem .png (preferindo domínios tryhackme)
+          URL=$(printf '%s' "$RAW_JSON" \
+            | jq -r '
+              .. | strings
+              | select(test("^https?://"))
+              | select(test("\\.(png)(\\?.*)?$"; "i"))
+              | select(test("tryhackme-badges|tryhackme\\.com"; "i"))
+            ' \
+            | head -n1)
+
+          if [ -z "${URL:-}" ] || [ "$URL" = "null" ]; then
+            echo "Não foi possível extrair URL do badge; a usar fallback." >&2
+            URL="$FALLBACK_URL"
+          fi
+
+          echo "URL do badge selecionado: $URL"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
       - name: Ver headers do remoto
         run: |
-          curl -sI "https://tryhackme-badges.s3.amazonaws.com/Somat27.png" | sed -n '1,20p'
+          curl -sI "${{ steps.badge.outputs.url }}" | sed -n '1,20p'
 
-      - name: Descarregar badge
+      - name: Descarregar badge (dinâmico)
         run: |
-          curl -fsSL "https://tryhackme-badges.s3.amazonaws.com/Somat27.png" -o thm_badge.png
+          curl -fsSL "${{ steps.badge.outputs.url }}" -o thm_badge.png
 
       - name: Debug – hashes HEAD vs novo
         run: |
