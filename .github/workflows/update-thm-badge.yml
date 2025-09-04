@@ -19,61 +19,63 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      THM_USERNAME: Somat27
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
 
-      - name: Resolver URL dinâmico do badge (com fallback)
-        id: badge
+      - name: Forçar regeneração + descarregar badge THM (PNG composto)
+        id: fetch
         run: |
           set -euo pipefail
 
-          API_URL="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5573378"
-          FALLBACK_URL="https://tryhackme-badges.s3.amazonaws.com/Somat27.png"
+          BASE="https://tryhackme-badges.s3.amazonaws.com/${THM_USERNAME}.png"
+          TMP="thm_badge.tmp"
 
-          echo "A consultar iframe: $API_URL"
-          # Tentar obter HTML do iframe (com algum retry e user-agent decente)
-          HTML=$(curl -fsSL --retry 5 --retry-all-errors --compressed \
-                 -H "User-Agent: GitHubActions (curl)" \
-                 -H "Accept: text/html" "$API_URL" || true)
+          # valor por omissão: inválido (serve para condicionar os passos seguintes)
+          echo "valid=false" >> "$GITHUB_OUTPUT"
 
-          # Procurar primeiro URL de imagem .png ou .svg (de preferência em domínios tryhackme)
-          IMG_URL=$(printf '%s' "$HTML" \
-            | grep -oE 'https?://[^"]+(tryhackme[^"]+)?\.(png|svg)(\?[^"]*)?' \
-            | head -n1 || true)
+          echo "A forçar regeneração no S3…"
+          # trigger de update; não falha o job se der 403/404 pontual
+          curl -fsS "${BASE}?update=1" -o /dev/null || true
 
-          if [ -z "${IMG_URL:-}" ]; then
-            echo "Não encontrei URL no iframe; a usar fallback."
-            IMG_URL="$FALLBACK_URL"
-          fi
+          # pequeno atraso para a CDN propagar
+          sleep 3
 
-          echo "URL de imagem detetado: $IMG_URL"
-          echo "url=$IMG_URL" >> "$GITHUB_OUTPUT"
+          echo "A descarregar PNG composto atualizado…"
+          BUSTER=$(date +%s)
+          curl -fsSL -H "Cache-Control: no-cache" "${BASE}?_=${BUSTER}" -o "$TMP"
 
-      - name: Ver headers do remoto
-        run: |
-          curl -sI "${{ steps.badge.outputs.url }}" | sed -n '1,20p'
-
-      - name: Descarregar badge (dinâmico)
-        run: |
-          set -euo pipefail
-          URL="${{ steps.badge.outputs.url }}"
-
-          # Dependências só se necessário (para svg->png)
-          if echo "$URL" | grep -qi '\.svg\(\?|$\)'; then
-            sudo apt-get update
-            sudo apt-get install -y imagemagick
-            TMP_SVG="thm_badge.svg"
-            curl -fsSL "$URL" -o "$TMP_SVG"
-            # Converter para PNG mantendo nome final igual ao usado no repo
-            convert "$TMP_SVG" thm_badge.png
-            rm -f "$TMP_SVG"
+          # Validar assinatura PNG (89 50 4E 47)
+          if head -c 4 "$TMP" | xxd -p -c 4 | grep -qi '^89504e47$'; then
+            mv "$TMP" thm_badge.png
+            echo "valid=true" >> "$GITHUB_OUTPUT"
           else
-            curl -fsSL "$URL" -o thm_badge.png
+            echo "Aviso: resposta não é PNG válido (a manter estado atual, sem commit)."
+            file "$TMP" || true
+
+            echo "Tentativa de fallback (sem cache-bust)…"
+            curl -fsSL "${BASE}" -o "$TMP" || true
+            if head -c 4 "$TMP" | xxd -p -c 4 | grep -qi '^89504e47$'; then
+              mv "$TMP" thm_badge.png
+              echo "valid=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "Falha a obter PNG válido; a abortar atualização desta execução."
+              rm -f "$TMP" || true
+              exit 0
+            fi
           fi
+
+      - name: Ver headers do PNG remoto
+        if: steps.fetch.outputs.valid == 'true'
+        run: |
+          BASE="https://tryhackme-badges.s3.amazonaws.com/${THM_USERNAME}.png"
+          curl -sI "${BASE}" | sed -n '1,30p'
 
       - name: Debug – hashes HEAD vs novo
+        if: steps.fetch.outputs.valid == 'true'
         run: |
           echo "Hash no commit (HEAD):"
           git show HEAD:thm_badge.png | sha256sum || echo "Ainda não existe no HEAD"
@@ -81,6 +83,7 @@ jobs:
           sha256sum thm_badge.png
 
       - name: Commit se mudou (por hash)
+        if: steps.fetch.outputs.valid == 'true'
         run: |
           set -e
           git config user.name "Tomás Gonçalves"
