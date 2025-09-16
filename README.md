@@ -42,42 +42,39 @@
 
 ---
 
-<details>
-  <summary>📊 GitHub Stats (click to expand)</summary>
-  <br/>
-  <div align="center" style="display:flex;justify-content:center;flex-wrap:wrap;gap:0;">
-    <picture>
-      <source
-        srcset="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&rank_icon=github&hide_title=true&hide_border=true&theme=tokyonight"
-        media="(prefers-color-scheme: dark)"
-      />
-      <img
-        src="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&rank_icon=github&hide_title=true&hide_border=true"
-        alt="GitHub Stats"
-        style="display:block;margin:0;"
-      />
-    </picture>
-    <picture>
-      <source
-        srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&hide_border=true&theme=tokyonight"
-        media="(prefers-color-scheme: dark)"
-      />
-      <img
-        src="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&hide_border=true"
-        alt="Top Languages"
-        style="display:block;margin:0;"
-      />
-    </picture>
-    <picture>
-      <source
-        srcset="https://streak-stats.demolab.com?user=somat27&hide_border=true&theme=tokyonight"
-        media="(prefers-color-scheme: dark)"
-      />
-      <img
-        src="https://streak-stats.demolab.com?user=somat27&hide_border=true"
-        alt="GitHub Streak"
-        style="display:block;margin:0;"
-      />
-    </picture>
-  </div>
-</details>
+<br/>
+<div align="center" style="display:flex;justify-content:center;flex-wrap:wrap;gap:0;">
+  <picture>
+    <source
+      srcset="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&rank_icon=github&hide_title=true&hide_border=true&theme=tokyonight"
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      src="https://github-readme-stats.vercel.app/api?username=somat27&show_icons=true&rank_icon=github&hide_title=true&hide_border=true"
+      alt="GitHub Stats"
+      style="display:block;margin:0;"
+    />
+  </picture>
+  <picture>
+    <source
+      srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&hide_border=true&theme=tokyonight"
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      src="https://github-readme-stats.vercel.app/api/top-langs/?username=somat27&layout=compact&hide_border=true"
+      alt="Top Languages"
+      style="display:block;margin:0;"
+    />
+  </picture>
+  <picture>
+    <source
+      srcset="https://streak-stats.demolab.com?user=somat27&hide_border=true&theme=tokyonight"
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      src="https://streak-stats.demolab.com?user=somat27&hide_border=true"
+      alt="GitHub Streak"
+      style="display:block;margin:0;"
+    />
+  </picture>
+</div>
