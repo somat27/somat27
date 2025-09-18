@@ -20,12 +20,6 @@
 - 🧑‍💻 **MuleSoft Intern**  
 - 🔐 Passionate about cybersecurity
 
-## Current focus
-
-- 📚 **Certification:** MCD-L1 (in progress)  
-- 🏠 **Homelab:** Home Assistant + NAS (backups, media, automations)  
-- 🔐 **Security labs:** TryHackMe -> learning more about cybersecurity
-
 ## TryHackMe
 
 [![TryHackMe](thm_badge.png)](https://tryhackme.com/p/Somat27)
@@ -33,7 +27,6 @@
 ## Certifications & Education
 - 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** — *in progress*  
 - 🎓 **BSc in Information Systems Engineering**, University of Minho  
-- 🎓 **Future MSc in Cybersecurity**, ESTG (School of Technology and Management), Polytechnic Institute of Viana do Castelo (IPVC)
 
 ## Get in touch
 
