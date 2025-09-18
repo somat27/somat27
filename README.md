@@ -17,7 +17,7 @@
 ## About me
 
 - 🌍 Based in Portugal  
-- 🧑‍💻 **MuleSoft Intern**  
+- 🧑‍💻 **MuleSoft Developer**  
 - 🔐 Passionate about cybersecurity
 
 ## TryHackMe
@@ -25,7 +25,7 @@
 [![TryHackMe](thm_badge.png)](https://tryhackme.com/p/Somat27)
 
 ## Certifications & Education
-- 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** — *in progress*  
+- 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** —> *in progress*  
 - 🎓 **BSc in Information Systems Engineering**, University of Minho  
 
 ## Get in touch
