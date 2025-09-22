@@ -1,6 +1,6 @@
 <h1 align="center">Hi 👋 I'm Tomás Gonçalves</h1>
 <p align="center">
-  Information Systems Engineer • MuleSoft Intern • Incoming Cybersecurity MSc
+  Information Systems Engineer • MuleSoft Developer
 </p>
 
 <p align="center">
