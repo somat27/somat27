@@ -6,7 +6,8 @@
 <p align="center">
   <!-- Followers -->
   <a href="https://github.com/somat27">
-    <img src="https://img.shields.io/github/followers/somat27?logo=github&style=for-the-badge&color=a855f7&label=Followers" alt="GitHub Followers"/>
+    <img src="https://img.shields.io/github/followers/somat27?style=flat&label=followers&color=a855f7" alt="GitHub Followers"/>
+
   </a>
   <!-- Visitors -->
   <a href="https://visitor-badge.laobi.icu/badge?page_id=somat27.somat27">
