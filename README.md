@@ -29,11 +29,6 @@
 - 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** —> *in progress*  
 - 🎓 **BSc in Information Systems Engineering**, University of Minho  
 
-## Get in touch
-
-- 🖥️ Portfolio: <a href="https://github.com/somat27">github.com/somat27</a>  
-- 💼 LinkedIn: <a href="https://www.linkedin.com/in/somat/">linkedin.com/in/somat</a>
-
 ---
 
 <br/>
