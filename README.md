@@ -1,6 +1,6 @@
 <h1 align="center">Hi 👋 I'm Tomás Gonçalves</h1>
 <p align="center">
-  Information Systems Engineer • MuleSoft Developer
+  Backend & Integrations Developer • Masters in Cibersecurity • Information Systems Engineer 
 </p>
 
 <p align="center">
@@ -15,18 +15,13 @@
   </a>
 </p>
 
-## About me
-
-- 🌍 Based in Portugal  
-- 🧑‍💻 **MuleSoft Developer**  
-- 🔐 Passionate about cybersecurity
-
 ## TryHackMe
 
 [![TryHackMe](thm_badge.png)](https://tryhackme.com/p/Somat27)
 
 ## Certifications & Education
-- 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** —> *in progress*  
+- 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** —> *in progress*
+- 🎓 **MSc in Cibersecurity**, Escola Superior de Tecnologia e Gestão do Instituto Politécnico de Viana do Castelo
 - 🎓 **BSc in Information Systems Engineering**, University of Minho  
 
 ---
