@@ -20,7 +20,6 @@
 [![TryHackMe](thm_badge.png)](https://tryhackme.com/p/Somat27)
 
 ## Certifications & Education
-- 🛠️ **MuleSoft Certified Developer – Level 1 (MCD-L1)** —> *in progress*
 - 🎓 **MSc in Cibersecurity**, Escola Superior de Tecnologia e Gestão do Instituto Politécnico de Viana do Castelo
 - 🎓 **BSc in Information Systems Engineering**, University of Minho  
 
